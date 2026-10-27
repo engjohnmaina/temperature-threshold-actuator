@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esp32 Smart Home Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Smart Home Dashboard</h1>
+        <p id="connection-status">Esp32 . Connecting...</p>
+    </header>
+    <hr>
+    <main>
+        <section>
+            <h2>Live Readings</h2>
+            <p>Temperature: <strong id="live-temp">--</strong>&deg;C</p>
+            <p>HUMIDITY: <strong id="live-hum">--</strong>%</p>
+        </section>
+        
+        <section>
+            <h2>Automation Control</h2>
+            <div class="control-card">
+                <div class="control-info">
+                    <span class="actuator-title">Temperature Setpoint</span>
+                    <span class="actuator-meta">Relay trigger if current temp exceeds target</span>
+                </div>
+                <div class="setpoint-container">
+                    <input type="number" id="temp-setpoint" value="25" min="15" max="40" step="0.5">
+                    <span class="unit">&deg;C</span>
+                </div>
+            </div>
+            
+            <div class="control-card">
+                <div class="control-info">
+                    <span class="actuator-title">Data Storage Interval</span>
+                    <span class="actuator-meta">Save to memory device every X seconds</span>
+                </div>
+                <div class="setpoint-container">
+                    <input type="number" id="log-interval-input" value="60" min="5" max="3600" onchange="updateLoggingIntervalTime()">
+                    <span class="unit">sec</span>
+                </div>
+            </div>
+            
+            <p>System State: <strong id="relay-status-text">OFF</strong></p>
+        </section>
+
+        <section>
+            <h2>Data Operations</h2>
+            <button onclick="window.location.href='/api/download'">📥 Download CSV Log</button>
+            <button onclick="copyLogsToClipboard()">📋 Copy Raw Text</button>
+            <button class="danger" onclick="clearDeviceLogs()">🗑️ Wipe Flash Log File</button>
+        </section>
+
+        <section class="graph-section">
+            <h2>Real-Time Temperature Plot</h2>
+            <canvas id="telemetryChart" width="500" height="180"></canvas>
+        </section>
+        
+        <section>
+            <h2>Complete History Log</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead><tr><th scope="col">Time</th><th scope="col">Temp (&deg;C)</th><th scope="col">Humidity (%)</th></tr></thead>
+                    <tbody id="long-body"></tbody>
+                </table>
+            </div>
+        </section>
+        
+        <aside>
+            <h2>Quick Help</h2>
+            <details>
+                <summary>How to wire the relay?</summary>
+                 <ol><li>Connect VCC to 3.3v</li><li>Connect GND to GND</li><li>Connect to GPIO 5</li></ol>
+            </details>
+            <details>
+                <summary>How do i find the IP?</summary>
+                <p>Open the serial monitor at 115200 baud.</p>
+            </details>
+        </aside>
+    </main>
+    <hr>
+    <footer><p><small>&copy; 2026. ESP32. Built with ❤️</small></p></footer>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
+
