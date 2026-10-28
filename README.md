@@ -2,6 +2,9 @@
 
 A MicroPython firmware stack for the ESP32-S3 (N16R8) that monitors temperature/humidity and drives a hardware relay. It features a lightweight web server with a real-time canvas dashboard, configuration adjustments, and local flash logging.
 
+## Dashboard Preview
+![Temperature Dashboard Preview](dashboard-preview.png)
+
 ## Core Features
 * **Decoupled Architecture:** Separated into `boot.py`, `logger.py`, and `main.py` for easier maintenance and low memory usage.
 * **Local Flash Logging:** Appends data directly to `data.log` on the 16MB flash chip. It runs independently of the web interface connection status.
