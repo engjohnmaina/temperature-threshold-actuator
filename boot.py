@@ -1,25 +1,42 @@
+import gc
 import network
-import time
 import secrets
+import time
 
-def connect_wifi():
-    wlan = network.WLAN(network.STA_IF)
-    wlan.active(True)
-    if not wlan.isconnected():
-        print("Initializing Network station configuration link...")
+gc.collect()
+
+USE_ACCESS_POINT_MODE = True 
+
+def initialize_network():
+    if USE_ACCESS_POINT_MODE:
+        ap = network.WLAN(network.AP_IF)
+        ap.active(True)
+        ap.config(essid=secrets.AP_SSID, password=secrets.AP_PASS, security=3)
+        
+        print("\nLocal Node Network Generation Successful!")
+        print("SSID Broadcast Name:  ", secrets.AP_SSID)
+        print("Node Gateway IP:      ", ap.ifconfig())
+        print("Connect your device to this Wi-Fi network!\n")
+    else:
+        wlan = network.WLAN(network.STA_IF)
+        wlan.active(True)
+        print(f"Scanning for home network router: {secrets.WIFI_SSID}...")
         wlan.connect(secrets.WIFI_SSID, secrets.WIFI_PASS)
         
-        # Connection timeout handler loop
-        timeout = 0
-        while not wlan.isconnected() and timeout < 20:
-            time.sleep(0.5)
+        connection_timeout = 20  
+        start_time = time.time()
+        while not wlan.isconnected():
+            if time.time() - start_time > connection_timeout:
+                print("\n[CRITICAL ERROR]: Wi-Fi link authentication timeout.")
+                break
             print(".", end="")
-            timeout += 1
+            time.sleep(0.5)
             
-    if wlan.isconnected():
-        print("\nWi-Fi network connection successfully established.")
-        print("Node IP Designation Setup Matrix:", wlan.ifconfig()[0])
-    else:
-        print("\nNetwork Fault: Timeout connection limit breached.")
+        if wlan.isconnected():
+            print("\n NETWORK INTERFACE PROFILE ACQUIRED SUCCESS")
+            print(" Local Target IPv4 Address:", wlan.ifconfig())
+            print(" Open your browser and type that IP address in!\n")
 
-connect_wifi()
+initialize_network()
+gc.collect()
+
