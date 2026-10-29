@@ -1,4 +1,5 @@
-# Temperature Threshold Actuator
+#  ESP32 IoT Project: Auto Temperature Relay Control
+
 
 A MicroPython firmware stack for the ESP32-S3 (N16R8) that monitors temperature/humidity and drives a hardware relay. It features a lightweight web server with a real-time canvas dashboard, configuration adjustments, and local flash logging.
 
