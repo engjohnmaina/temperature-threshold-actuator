@@ -3,7 +3,7 @@
 A MicroPython firmware stack for the ESP32-S3 (N16R8) that monitors temperature/humidity and drives a hardware relay. It features a lightweight web server with a real-time canvas dashboard, configuration adjustments, and local flash logging.
 
 ## Watch the Project Video
- **Check out the fully working demonstration here:** *( https://www.youtube.com/watch?v=XXW-iPh-jk8)*
+ ![Check out the fully working demonstration:]( https://www.youtube.com/watch?v=XXW-iPh-jk8)
 
 ## Dashboard Preview
 ![Temperature Dashboard Preview](dashboard-preview.png)
