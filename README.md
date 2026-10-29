@@ -1,6 +1,9 @@
-# Thermal Trigger Controller & Telemetry Node
+# Temperature Threshold Actuator
 
 A MicroPython firmware stack for the ESP32-S3 (N16R8) that monitors temperature/humidity and drives a hardware relay. It features a lightweight web server with a real-time canvas dashboard, configuration adjustments, and local flash logging.
+
+## Watch the Project Video
+ **Check out the fully working demonstration here:** [YouTube Video Link Coming Soon](https://github.com) *(Paste your live YouTube link here once published!)*
 
 ## Dashboard Preview
 ![Temperature Dashboard Preview](dashboard-preview.png)
