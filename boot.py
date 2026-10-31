@@ -23,14 +23,14 @@ def initialize_network():
         print(f"Scanning for home network router: {secrets.WIFI_SSID}...")
         wlan.connect(secrets.WIFI_SSID, secrets.WIFI_PASS)
         
-        connection_timeout = 20  
-        start_time = time.time()
+        connection_timeout = 20000  
+        start_time = time.ticks_ms()
         while not wlan.isconnected():
-            if time.time() - start_time > connection_timeout:
+            if time.ticks_diff(time.ticks_ms(),start_time) > connection_timeout:
                 print("\n[CRITICAL ERROR]: Wi-Fi link authentication timeout.")
                 break
             print(".", end="")
-            time.sleep(0.5)
+            time.sleep(100)
             
         if wlan.isconnected():
             print("\n NETWORK INTERFACE PROFILE ACQUIRED SUCCESS")
