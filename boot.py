@@ -30,7 +30,7 @@ def initialize_network():
                 print("\n[CRITICAL ERROR]: Wi-Fi link authentication timeout.")
                 break
             print(".", end="")
-            time.sleep(100)
+            time.sleep_ms(100)
             
         if wlan.isconnected():
             print("\n NETWORK INTERFACE PROFILE ACQUIRED SUCCESS")
